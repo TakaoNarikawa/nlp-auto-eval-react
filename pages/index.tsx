@@ -1,14 +1,19 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 
 import { useState } from 'react';
-import { bleu, tokenizer } from '../lib/text';
+import { bleu, tokenizer, nGramPrecisions, brevityPenalty } from '../lib/text';
 
 const Home: NextPage = () => {
   const [textHypothesis, setHypValue] = useState("this is a pen");
   const [textReferences, setRefValue] = useState("this is a apple");
   const bleuN = 4;
+
+  const tokensHyp = tokenizer(textHypothesis);
+  const tokensRef = tokenizer(textReferences);
+
+  const precisions = nGramPrecisions(bleuN, tokensHyp, tokensRef);
+  const bp = brevityPenalty(tokensHyp.length, tokensRef.length);
 
   const handleChangeGen = (event) => {
     setHypValue(event.target.value);
@@ -16,6 +21,7 @@ const Home: NextPage = () => {
   const handleChangeRef = (event) => {
     setRefValue(event.target.value);
   };
+
   return (
     <div className="container">
       <Head>
@@ -33,16 +39,29 @@ const Home: NextPage = () => {
         <input type="text" value={textReferences} onChange={handleChangeRef} />
       </div>
       <p>
-        BLEU score:
-        {bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}
-        <br />
-        (N={bleuN})
+        <ul>
+          <li>(N={bleuN})</li>
+          <li>BLEU score:{bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}</li>
+          <li>BP={bp}</li>
+        </ul>
+        <table>
+          {Object.keys(precisions).map(index => {
+            return <tr>
+              <th>{index}</th>
+              <td>{precisions[index].match}/{precisions[index].total}</td>
+            </tr>
+          })}
+        </table>
       </p>
       <div>
         <h3>参考文献</h3>
-        <a href="https://cloud.google.com/translate/automl/docs/evaluate?hl=ja#bleu">
-          モデルの評価  |  AutoML Translation のドキュメント  |  Google Cloud
-        </a>
+        <ul>
+          <li>
+            <a href="https://cloud.google.com/translate/automl/docs/evaluate?hl=ja#bleu">
+              モデルの評価  |  AutoML Translation のドキュメント  |  Google Cloud
+            </a>
+          </li>
+        </ul>
       </div>
     </div >
   );
