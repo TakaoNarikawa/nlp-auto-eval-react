@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       <Head>
         <title>BLEU計算するやつ</title>
         <meta name="description" content="BLEU計算するやつ" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon.png" />
       </Head>
       <h1>BLEU計算するやつ</h1>
       <div>
