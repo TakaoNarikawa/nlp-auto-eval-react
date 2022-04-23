@@ -28,36 +28,37 @@ const Home: NextPage = () => {
         <title>BLEU計算するやつ</title>
         <meta name="description" content="BLEU計算するやつ" />
         <link rel="icon" href="/icon.png" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css" />
       </Head>
       <h1>BLEU計算するやつ</h1>
       <div>
         生成文:
-        <input type="text" value={textHypothesis} onChange={handleChangeGen} />
+        <textarea rows={2} value={textHypothesis} onChange={handleChangeGen} />
       </div>
       <div>
         参照文:
-        <input type="text" value={textReferences} onChange={handleChangeRef} />
+        <textarea rows={2} value={textReferences} onChange={handleChangeRef} />
       </div>
       <p>
-        <ul>
-          <li>(N={bleuN})</li>
-          <li>BLEU score:{bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}</li>
-          <li>BP={bp}</li>
-        </ul>
+        (N={bleuN})
         <table>
-          {Object.keys(precisions).map(index => {
-            return <tr>
-              <th>{index}</th>
-              <td>{precisions[index].match}/{precisions[index].total}</td>
-            </tr>
-          })}
+          <tbody>
+            {Object.keys(precisions).map(index => {
+              return <tr>
+                <th>P{index}</th>
+                <td>{precisions[index].match}/{precisions[index].total}</td>
+              </tr>
+            })}
+            <tr><th>BP</th><td>{bp}</td></tr>
+            <tr><th>BLEU</th><td>{bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}</td></tr>
+          </tbody>
         </table>
       </p>
       <div>
         <h3>参考文献</h3>
         <ul>
           <li>
-            <a href="https://cloud.google.com/translate/automl/docs/evaluate?hl=ja#bleu">
+            <a href="https://cloud.google.com/translate/automl/docs/evaluate?hl=ja#bleu" target="_blank">
               モデルの評価  |  AutoML Translation のドキュメント  |  Google Cloud
             </a>
           </li>
