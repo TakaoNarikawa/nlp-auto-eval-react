@@ -15,10 +15,10 @@ const Home: NextPage = () => {
   const precisions = nGramPrecisions(bleuN, tokensHyp, tokensRef);
   const bp = brevityPenalty(tokensHyp.length, tokensRef.length);
 
-  const handleChangeGen = (event) => {
+  const handleChangeGen = (event: any) => {
     setHypValue(event.target.value);
   };
-  const handleChangeRef = (event) => {
+  const handleChangeRef = (event: any) => {
     setRefValue(event.target.value);
   };
 
@@ -43,11 +43,11 @@ const Home: NextPage = () => {
         (N={bleuN})
         <table>
           <tbody>
-            {Object.keys(precisions).map(index => {
-              return <tr>
-                <th>P{index}</th>
-                <td>{precisions[index].match}/{precisions[index].total}</td>
-              </tr>
+            {Object.keys(precisions).map(i => {
+              return <tr key={i}>
+                <th>P{i}</th>
+                <td>{precisions[Number(i)].match}/{precisions[Number(i)].total}</td>
+              </tr>;
             })}
             <tr><th>BP</th><td>{bp}</td></tr>
             <tr><th>BLEU</th><td>{bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}</td></tr>
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
         <h3>参考文献</h3>
         <ul>
           <li>
-            <a href="https://cloud.google.com/translate/automl/docs/evaluate?hl=ja#bleu" target="_blank">
+            <a href="https://cloud.google.com/translate/automl/docs/evaluate?hl=ja#bleu" target="_blank" rel="noreferrer">
               モデルの評価  |  AutoML Translation のドキュメント  |  Google Cloud
             </a>
           </li>

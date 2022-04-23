@@ -43,7 +43,7 @@ export const brevityPenalty = (hypLength: number, refLength: number) => {
 
 type Precisions = { "match": number, "total": number }[];
 export const bleuFromPrecisions = (precisions: Precisions, bp: number, n: number) => {
-  const pn: number[] = Object.keys(precisions).map(i => precisions[i].match / precisions[i].total);
+  const pn: number[] = Object.keys(precisions).map(i => precisions[Number(i)].match / precisions[Number(i)].total);
   const product = pn.reduce((acc, p) => {
     // https://github.com/nltk/nltk/blob/3.2.5/nltk/translate/bleu_score.py#L487-L493
     if (p > 0) {
@@ -70,10 +70,10 @@ export const nGramPrecisions = (bleuN: number, tokensHyp: string[], tokensRef: s
     ret[index] = {
       "match": nGramPrecision(tokensHyp, tokensRef, index),
       "total": (tokensHyp.length - (index - 1))
-    }
+    };
   }
   return ret;
-}
+};
 
 export const bleu = (
   hypothesis: string[],
