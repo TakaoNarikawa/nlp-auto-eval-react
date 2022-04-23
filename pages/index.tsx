@@ -61,9 +61,9 @@ const Home: NextPage = () => {
               モデルの評価  |  AutoML Translation のドキュメント  |  Google Cloud
             </a>
           </li>
-          <li><a href="https://en.wikipedia.org/wiki/BLEU" target="_blank">BLEU - Wikipedia</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/BLEU" target="_blank" rel="noreferrer">BLEU - Wikipedia</a></li>
         </ul>
-        リポジトリ: <a href="https://github.com/s2terminal/nlp-auto-eval-react" target="_blank">s2terminal/nlp-auto-eval-react</a>
+        リポジトリ: <a href="https://github.com/s2terminal/nlp-auto-eval-react" target="_blank" rel="noreferrer">s2terminal/nlp-auto-eval-react</a>
       </div>
     </div >
   );
