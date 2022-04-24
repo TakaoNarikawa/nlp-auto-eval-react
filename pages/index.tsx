@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   };
   const handleChangeN = (event: any) => {
     setBleuN(Math.max(1, Number(event.target.value)));
-  }
+  };
   const handleChangeDefaultButton = (n: number) => {
     return (_e: any) => {
       switch (n) {
@@ -40,8 +40,8 @@ const Home: NextPage = () => {
           setRefValue("私 は 猫 です 。 名前 は まだ あり ませ ん 。");
           break;
       }
-    }
-  }
+    };
+  };
 
   return (
     <div className="container">
@@ -79,7 +79,7 @@ const Home: NextPage = () => {
                 {precisions[Number(i)].match}/{precisions[Number(i)].total}
                 {precisions[Number(i)].match === 0 && "※"}
               </td>
-            </tr>
+            </tr>;
           })}
           <tr><th>Brevity Penalty</th><td>{bp}</td></tr>
           <tr><th>BLEU</th><td>{bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}</td></tr>

@@ -18,4 +18,5 @@ $ docker compose run --rm app yarn run test
 ## Linting
 ```
 $ docker compose run --rm app yarn run lint
+$ docker compose run --rm app yarn run lint:fix
 ```
