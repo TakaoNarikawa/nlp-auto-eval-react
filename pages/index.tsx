@@ -82,7 +82,7 @@ const Home: NextPage = () => {
             </tr>;
           })}
           <tr><th>Brevity Penalty</th><td>{bp}</td></tr>
-          <tr><th>BLEU</th><td>{bleu(tokenizer(textHypothesis), tokenizer(textReferences), 4)}</td></tr>
+          <tr><th>BLEU</th><td>{bleu(tokenizer(textHypothesis), tokenizer(textReferences), bleuN)}</td></tr>
         </tbody>
       </table>
       <p>※n-gramの一致数がゼロになっている場合、BLEUは適切でない数値になります。</p>
